@@ -3,6 +3,8 @@ import pandas as pd
 from skyfield.api import EarthSatellite
 from datetime import datetime
 
+from skyfield.positionlib import Geocentric
+
 # def infinite(t):
 #     while True:
 #     time.sleep(60)
@@ -12,13 +14,18 @@ from datetime import datetime
 satellites = load.tle_file("./test.txt")
 print('Loaded', len(satellites), 'debris')
 
-date_list = pd.date_range(datetime.today(), periods=100).tolist()
+# date_list = pd.date_range(datetime.today(), periods=100).tolist()
 
-this_month = int(date_list[0].strftime("%m"))
-this_year = int(date_list[0].strftime("%Y"))
-this_date = int(date_list[0].strftime("%d"))
+# this_month = int(date_list[0].strftime("%m"))
+# this_year = int(date_list[0].strftime("%Y"))
+# this_date = int(date_list[0].strftime("%d"))
 
 ts = load.timescale()
-t = ts.utc(this_year, this_month, this_date)
+t = ts.now()
+
 for sat in satellites:
-    print(str(sat) + " " + str(sat.at(t).position.km))
+    geocentric = sat.at(t)
+    subpoint = wgs84.subpoint(geocentric)
+    print('Latitude:', subpoint.latitude)
+    print('Longitude:', subpoint.longitude)
+    print('Height: {:.1f} km'.format(subpoint.elevation.km))
