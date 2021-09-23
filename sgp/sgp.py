@@ -1,8 +1,8 @@
 from skyfield.api import load, wgs84
 import pandas as pd
 from skyfield.api import EarthSatellite
-from datetime import datetime
-
+from datetime import datetime as dt
+import json
 from skyfield.positionlib import Geocentric
 
 # def infinite(t):
@@ -25,7 +25,15 @@ t = ts.now()
 
 for sat in satellites:
     geocentric = sat.at(t)
+    print(sat.name)
     subpoint = wgs84.subpoint(geocentric)
     print('Latitude:', subpoint.latitude)
     print('Longitude:', subpoint.longitude)
     print('Height: {:.1f} km'.format(subpoint.elevation.km))
+    sat_dict = {
+        "name": sat.name,
+        "Latitude": str(subpoint.latitude),
+        "Longitude": str(subpoint.longitude)
+    }
+    with open('data.json', 'w') as outfile:
+        json.dump(sat_dict, outfile)
