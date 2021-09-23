@@ -8,4 +8,4 @@ print('Loaded', len(satellites), 'debris')
 ts = load.timescale()
 t = ts.now()
 for sat in satellites:
-    print(sat.at(t).position.km)
+    print(str(sat) + " " + str(sat.at(t).position.km))
