@@ -5,35 +5,32 @@ from datetime import datetime as dt
 import json
 from skyfield.positionlib import Geocentric
 
-# def infinite(t):
-#     while True:
-#     time.sleep(60)
-
-
 # stations_url = 'https://celestrak.com/NORAD/elements/1999-025.txt'
-satellites = load.tle_file("./test.txt")
+satelite_file = "./test"
+satellites = load.tle_file(satelite_file + '.txt')
 print('Loaded', len(satellites), 'debris')
-
-# date_list = pd.date_range(datetime.today(), periods=100).tolist()
-
-# this_month = int(date_list[0].strftime("%m"))
-# this_year = int(date_list[0].strftime("%Y"))
-# this_date = int(date_list[0].strftime("%d"))
 
 ts = load.timescale()
 t = ts.now()
 
+i = 0
+sat_data = {}
 for sat in satellites:
     geocentric = sat.at(t)
     print(sat.name)
     subpoint = wgs84.subpoint(geocentric)
-    print('Latitude:', subpoint.latitude)
-    print('Longitude:', subpoint.longitude)
+    this_latitude = subpoint.latitude.degrees
+    this_longitude = subpoint.longitude.degrees
+    print('Latitude:', this_latitude)
+    print('Longitude:', this_longitude)
     print('Height: {:.1f} km'.format(subpoint.elevation.km))
-    sat_dict = {
-        "name": sat.name,
-        "Latitude": str(subpoint.latitude),
-        "Longitude": str(subpoint.longitude)
+    sat_data[i] = {
+            "Latitude": str(this_latitude),
+            "Longitude": str(this_longitude)
     }
-    with open('data.json', 'w') as outfile:
-        json.dump(sat_dict, outfile)
+    i+=1
+
+sat_data_json = json.dumps(sat_data, indent = 4)
+# print(sat_data_json)
+with open(satelite_file + ".json", "w") as outfile:
+    json.dump(sat_data_json, outfile)
