@@ -1,0 +1,21 @@
+{
+  "pyroKid": {
+    "attack": {
+      "damage": 50,
+      "reload": [1.8,5,6,7,8.0]
+    },
+    "defense": {
+      "health": 120,
+      "regen": 5
+    }
+  },
+  "iceKid": {
+    "attack": {
+      "damage": 20,
+      "reload": 0.6
+    },
+    "defense": {
+      "health": 170,
+      "regen": 8
+    }
+}
