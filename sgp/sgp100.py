@@ -12,14 +12,13 @@ def calculate_initial_paramenters(repeating_schedule):
     satellites = load.tle_file(stations_url)
 
     # Make a list of 100 days
-    # today_date = datetime.now(timezone.utc)
-    # today_date = today_date.replace(tzinfo=pytz.utc)
-    # date_list = pd.date_range(start = today_date, periods = 100, freq='D').to_pydatetime().tolist()
+    today_date = datetime.now(timezone.utc)
+    today_date = today_date.replace(tzinfo=pytz.utc)
+    date_list = pd.date_range(start = today_date, periods = 100, freq='D').to_pydatetime().tolist()
 
     # Load timescale
     ts = load.timescale()
-    # t = ts.utc(date_list)
-    t = ts.now()
+    t = ts.utc(date_list)
 
     # Generate a dictionary for satelite data
     sat_data = {}
@@ -44,7 +43,7 @@ def calculate_initial_paramenters(repeating_schedule):
         sat_data["longitude"] = longitude
         sat_data["name"] = name
         sat_data["epoch"] = epoch
-        # print(sat_data)
+        print(sat_data)
         
         # Repeat after 0.1 seconds
         schedule.enter(0.1, 1, calculate_initial_paramenters, (repeating_schedule,))
