@@ -6,6 +6,8 @@ from skyfield.api import load, wgs84
 from skyfield.api import EarthSatellite
 import json
 
+## repeat he whole process after every 0.1 second...
+
 stations_url = 'https://celestrak.com/NORAD/elements/1999-025.txt'
 satellites = load.tle_file(stations_url)
 # print('Loaded', len(satellites), 'debris')
@@ -65,4 +67,11 @@ sat_data["epoch"] = epoch
 
 def index(request):
     return HttpResponse(json.dumps(sat_data))
+
+########################
+
+# arekta code banaite hobe, jeita same bhabe 0.1 sec por repeat hobe
+# prottekta debris er lat long alt calculate korbe for 100 days. 
+# oitake json format e nite hobe. (format is in slack.. )
+# make this whole thing for 4 ta alada alada catagory er debris... 
 
