@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rest_framework import viewsets
+#from rest_framework import viewsets
 
 from skyfield.api import load, wgs84
 from skyfield.api import EarthSatellite
@@ -27,6 +27,7 @@ i = 0
 sat_data = {}
 longitude = []
 latitude = []
+altitude = []
 name = []
 epoch = []
 for sat in satellites:
@@ -36,6 +37,8 @@ for sat in satellites:
     # print(sat.epoch)
     latitude.append(subpoint.latitude.degrees)
     longitude.append(subpoint.longitude.degrees)
+    altitude.append(format(subpoint.elevation.km))
+
     name.append(sat.name)
     temp = str(sat).split(' ')
     epoch.append(str(temp[6] + " " + temp[7]))
