@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace CoordinateMapper {
     public static class PlanetUtility {
         public static Vector3 VectorFromLatLng(float latitude, float longitude, Vector3 direction) {
@@ -58,4 +59,6 @@ namespace CoordinateMapper {
             return null;
         }
     }
+
+    
 }

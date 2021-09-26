@@ -48,10 +48,10 @@ public class LoadJSON : MonoBehaviour
 
     public void GetJsonData()
     {
-        StartCoroutine(RequestWebService(getDataUrlTrash1, 1));
+       // StartCoroutine(RequestWebService(getDataUrlTrash1, 1));
         StartCoroutine(RequestWebService(getDataUrlTrash2, 2));
-        StartCoroutine(RequestWebService(getDataUrlTrash3, 3));
-        StartCoroutine(RequestWebService(getDataUrlTrash4, 4));
+        //StartCoroutine(RequestWebService(getDataUrlTrash3, 3));
+       // StartCoroutine(RequestWebService(getDataUrlTrash4, 4));
     }
 
     IEnumerator RequestWebService(string url, int i)

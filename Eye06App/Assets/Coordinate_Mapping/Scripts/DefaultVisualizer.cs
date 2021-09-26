@@ -88,6 +88,8 @@ namespace CoordinateMapper {
                 {
                     var plotted = info.Plot(transform, transform, 0, false, null);
                     plotted.name = "Default Point " + i;
+
+                    //StartCoroutine(DoDelay(5f, info, i));
                 }
                 else
                 {
@@ -97,5 +99,14 @@ namespace CoordinateMapper {
 
             if (loadComplete != null) { loadComplete.Invoke(infos); }
         }
+
+      /*  IEnumerator DoDelay(float delayTime, DefaultCoordinatePointInfo info, int i)
+        {
+            yield return new WaitForSeconds(delayTime);
+            var plotted = info.Plot(transform, transform, 0, false, null);
+            plotted.name = "Default Point " + i;
+        }*/
     }
+
+    
 }
