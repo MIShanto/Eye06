@@ -3,6 +3,7 @@ import pytz
 import pandas as pd
 import sched, time
 from skyfield.api import load, wgs84
+import json
 
 schedule = sched.scheduler(time.time, time.sleep)
 
@@ -19,32 +20,34 @@ def calculate_initial_paramenters(repeating_schedule):
     # Load timescale
     ts = load.timescale()
     t = ts.utc(date_list)
-
+    #print(t)
     # Generate a dictionary for satelite data
     sat_data = {}
     longitude = []
     latitude = []
     altitude = []
-    name = []
     epoch = []
 
     # Generate satelite data
     for sat in satellites:
         geocentric = sat.at(t)
+        #print(geocentric)
         subpoint = wgs84.subpoint(geocentric)
         latitude.append(subpoint.latitude.degrees)
         longitude.append(subpoint.longitude.degrees)
         altitude.append(format(subpoint.elevation.km))
-        name.append(sat.name)
+        name = sat.name
         temp = str(sat).split(' ')
         epoch.append(str(temp[6] + " " + temp[7]))
 
         sat_data["latitude"] = latitude
         sat_data["longitude"] = longitude
+        sat_data["altitude"] = altitude
         sat_data["name"] = name
         sat_data["epoch"] = epoch
-        print(sat_data)
-        
+        #print(sat_data)
+        #sat_data_json = json.dumps(sat_data)
+       # print(sat_data_json)
         # Repeat after 0.1 seconds
         schedule.enter(0.1, 1, calculate_initial_paramenters, (repeating_schedule,))
 
