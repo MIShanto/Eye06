@@ -24,8 +24,8 @@ public class EarthquakeInfo: ICoordinatePoint {
         return null;
     }
 
-    public GameObject Plot(Transform planet, Transform container, int layer, bool alreadyExists, GameObject existingObject) { 
-        var plotted = PlanetUtility.PlacePoint(planet, container, location, pointPrefab, false, null);
+    public GameObject Plot(Transform planet, Transform container, int layer, bool alreadyExists, GameObject existingObject, float elevation) { 
+        var plotted = PlanetUtility.PlacePoint(planet, container, location, pointPrefab, false, null, elevation);
 
         if (plotted != null) {
             plotted.layer = layer;

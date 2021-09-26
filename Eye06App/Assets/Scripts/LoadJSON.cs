@@ -36,22 +36,27 @@ public class LoadJSON : MonoBehaviour
     string getDataUrlTrash3;
     string getDataUrlTrash4;
 
+    string getPredictedDataUrlTrash2;
+
     void Start()
     {
-        getDataUrlTrash1 = "https://mamunspacer.herokuapp.com/api/data/";
-        getDataUrlTrash2 = "https://mamunspacer.herokuapp.com/api/data/";
-        getDataUrlTrash3 = "https://mamunspacer.herokuapp.com/api/data/";
-        getDataUrlTrash4 = "https://mamunspacer.herokuapp.com/api/data/";
+        //lat, long, name, alt
+        getDataUrlTrash1 = "https://mamunspacer.herokuapp.com/api/1/";
+        getDataUrlTrash2 = "https://mamunspacer.herokuapp.com/api/2/";
+        getDataUrlTrash3 = "https://mamunspacer.herokuapp.com/api/3/";
+        getDataUrlTrash4 = "https://mamunspacer.herokuapp.com/api/4/";
+        getPredictedDataUrlTrash2 = "https://mamunspacer.herokuapp.com/api/p2";
 
-        InvokeRepeating("GetJsonData", 0f, 0.2f);
+        InvokeRepeating("GetJsonData", 0f, 5f);
     }
 
     public void GetJsonData()
     {
-       // StartCoroutine(RequestWebService(getDataUrlTrash1, 1));
+        StartCoroutine(RequestWebService(getDataUrlTrash1, 1));
         StartCoroutine(RequestWebService(getDataUrlTrash2, 2));
-        //StartCoroutine(RequestWebService(getDataUrlTrash3, 3));
-       // StartCoroutine(RequestWebService(getDataUrlTrash4, 4));
+        StartCoroutine(RequestWebService(getDataUrlTrash3, 3));
+        StartCoroutine(RequestWebService(getDataUrlTrash4, 4));
+        //StartCoroutine(RequestWebService(getPredictedDataUrlTrash2, 2));
     }
 
     IEnumerator RequestWebService(string url, int i)
@@ -81,6 +86,7 @@ public class LoadJSON : MonoBehaviour
                         if(i==1)
                             trash1.StartParsing(jsonData);
                         else if (i == 2)
+                            //trash2.TestDraw(jsonData);
                             trash2.StartParsing(jsonData);
                         else if (i == 3)
                             trash3.StartParsing(jsonData);

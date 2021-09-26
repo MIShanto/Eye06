@@ -61,6 +61,24 @@ namespace CoordinateMapper {
 
         }
 
+        public void TestDraw(JSONNode myJSON_file)
+        {
+            Vector3[] points = new Vector3[5];
+            for (int i = 0; i < 5; i++)
+            {
+                var point = PlanetUtility.VectorFromLatLng(myJSON_file[0][0][i].AsFloat, myJSON_file[0][1][i].AsFloat, Vector3.right);
+                var hitInfo = PlanetUtility.LineFromOriginToSurface(transform, point, LayerMask.GetMask("Planet"));
+                points[i] = hitInfo.Value.point + point;
+                
+            }
+            LineController.instance.SetupLines(points);
+            //Debug.LogError(points[0]);
+            //Debug.LogError(points[1]);
+           // Debug.LogError(points[2]);
+           // Debug.LogError(points[3]);
+           // Debug.LogError(points[4]);
+
+        }
         public void StartParsing(JSONNode myJSON_file)
         {
             /*          float test_float = 41.9999599995999959f;
@@ -86,26 +104,63 @@ namespace CoordinateMapper {
                 info.pointPrefab = pointPrefab;
                 if (i >= childCount)
                 {
-                    var plotted = info.Plot(transform, transform, 0, false, null);
+                    var plotted = info.Plot(transform, transform, 0, false, null, json_data_of_trash[3][i].AsFloat);
+
+                    UpdateTrashZValue(plotted, i);
+
+                    //plotted.transform.position = new Vector3(plotted.transform.position.x, plotted.transform.position.y,
+                    //   json_data_of_trash[3][i].AsFloat * 3/3500f);
+
                     plotted.name = "Default Point " + i;
 
                     //StartCoroutine(DoDelay(5f, info, i));
                 }
                 else
                 {
-                    var plotted = info.Plot(transform, transform, 0, true, transform.GetChild(i).gameObject);
+                    var plotted = info.Plot(transform, transform, 0, true, transform.GetChild(i).gameObject, json_data_of_trash[3][i].AsFloat);
+
+                    UpdateTrashZValue(plotted, i);
+
+                    //plotted.transform.position = new Vector3(plotted.transform.position.x, plotted.transform.position.y,
+                    //  plotted.transform.position.y * json_data_of_trash[3][i].AsFloat * 3 / 3500f);
                 }
             }
 
             if (loadComplete != null) { loadComplete.Invoke(infos); }
         }
 
-      /*  IEnumerator DoDelay(float delayTime, DefaultCoordinatePointInfo info, int i)
+        void UpdateTrashZValue(GameObject obj, int i)
         {
-            yield return new WaitForSeconds(delayTime);
-            var plotted = info.Plot(transform, transform, 0, false, null);
-            plotted.name = "Default Point " + i;
-        }*/
+            //Debug.Log(obj);
+            if(json_data_of_trash[3][i].AsFloat == 0)
+            {
+                obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y,
+                                                           obj.transform.position.z);
+            }
+            else
+            {
+                //float zValue = (3 / 3500f * json_data_of_trash[3][i].AsFloat);// obj.transform.position.z - ((3400 / 3500) * json_data_of_trash[3][i].AsFloat);
+                //obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, zValue * obj.transform.position.z);
+            }
+            /*if(obj.transform.position.z > 0f && obj != null)
+            {
+                float zValue = (3 / 3500f * json_data_of_trash[3][i].AsFloat);//0.1f + (2/3500f * json_data_of_trash[3][i].AsFloat);
+                obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, zValue);
+            }
+            else if (obj.transform.position.z < 0f && obj != null )
+            {
+                float zValue = (3 / 3500f * json_data_of_trash[3][i].AsFloat);// obj.transform.position.z - ((3400 / 3500) * json_data_of_trash[3][i].AsFloat);
+                obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, zValue);
+            }*/
+            //plotted.transform.position = new Vector3(plotted.transform.position.x, plotted.transform.position.y,
+            //   json_data_of_trash[3][i].AsFloat * 3/3500f);
+        }
+        /*  IEnumerator DoDelay(float delayTime, DefaultCoordinatePointInfo info, int i)
+          {
+              yield return new WaitForSeconds(delayTime);
+              var plotted = info.Plot(transform, transform, 0, false, null);
+              plotted.name = "Default Point " + i;
+          }*/
     }
 
     

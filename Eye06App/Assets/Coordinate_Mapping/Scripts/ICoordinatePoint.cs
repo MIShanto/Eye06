@@ -8,6 +8,6 @@ namespace CoordinateMapper {
         GameObject pointPrefab { get; set; }
 
         GameObject Plot(Transform planet, Transform container, int layer);
-        GameObject Plot(Transform planet, Transform container, int layer, bool alreadyExists, GameObject existingObject);
+        GameObject Plot(Transform planet, Transform container, int layer, bool alreadyExists, GameObject existingObject, float elevation);
     }
 }

@@ -37,22 +37,22 @@ namespace CoordinateMapper {
             return null;
         }
 
-        public static GameObject PlacePoint(Transform planet, Transform container, Location location, GameObject prefab, bool alreadyExists, GameObject existingObject) {
-            var placingAdjustment = Random.RandomRange(0.0f, 1.0f);
+        public static GameObject PlacePoint(Transform planet, Transform container, Location location, GameObject prefab, bool alreadyExists, GameObject existingObject, float elevation) {
+            var placingAdjustment = elevation / 2000f;
             var point = PlanetUtility.VectorFromLatLng(location.latitude, location.longitude, Vector3.right);
             //Debug.LogError(point.x);
             var hitInfo = PlanetUtility.LineFromOriginToSurface(planet, point, LayerMask.GetMask("Planet")); //TODO: Don't use "Planet" default layer?
             if (hitInfo.HasValue) {
                 if (!alreadyExists)
                 {
-                    var go = UnityEngine.Object.Instantiate(prefab, hitInfo.Value.point, Quaternion.identity, container);
+                    var go = UnityEngine.Object.Instantiate(prefab, hitInfo.Value.point + (point * placingAdjustment), Quaternion.identity, container);
                     go.name = location.name;
                     return go;
                 }
                 else
                 {
-                    existingObject.transform.position = new Vector3(hitInfo.Value.point.x, hitInfo.Value.point.y, existingObject.transform.position.z);
-                    return null;
+                    existingObject.transform.position = hitInfo.Value.point + (point * placingAdjustment);
+                    return existingObject;
                 }
             }
 

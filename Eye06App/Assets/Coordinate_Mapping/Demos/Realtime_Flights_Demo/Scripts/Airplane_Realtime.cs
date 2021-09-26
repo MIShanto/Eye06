@@ -31,9 +31,9 @@ public class FlightInfo : ICoordinatePoint {
         return null;
     }
 
-    public GameObject Plot(Transform planet, Transform container, int layer, bool alreadyExists, GameObject existingObject)
+    public GameObject Plot(Transform planet, Transform container, int layer, bool alreadyExists, GameObject existingObject, float elevation)
     {
-        var plotted = PlanetUtility.PlacePoint(planet, container, location, pointPrefab, false, null);
+        var plotted = PlanetUtility.PlacePoint(planet, container, location, pointPrefab, false, null, elevation);
         return plotted;
     }
 

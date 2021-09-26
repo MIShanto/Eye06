@@ -19,8 +19,8 @@ namespace CoordinateMapper {
         {
             return null;
         }
-        public GameObject Plot(Transform planet, Transform container, int layer, bool alreadyExists, GameObject existingObject) {
-            var plotted = PlanetUtility.PlacePoint(planet, container, location, pointPrefab,  alreadyExists,  existingObject);
+        public GameObject Plot(Transform planet, Transform container, int layer, bool alreadyExists, GameObject existingObject, float elevation) {
+            var plotted = PlanetUtility.PlacePoint(planet, container, location, pointPrefab,  alreadyExists,  existingObject, elevation);
 
             if (plotted != null) {
                 plotted.layer = layer;
@@ -30,7 +30,7 @@ namespace CoordinateMapper {
 
                 var point = (plotted.transform.position - planet.transform.position).normalized;
                 plotted.transform.localScale = new Vector3(plotted.transform.localScale.x, plotted.transform.localScale.y, plotted.transform.localScale.z * magnitude);
-                //plotted.transform.rotation = Quaternion.LookRotation(point);
+                plotted.transform.rotation = Quaternion.LookRotation(point);
             }
 
             return plotted;

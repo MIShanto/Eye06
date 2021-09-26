@@ -19,8 +19,7 @@ public class TrashData : MonoBehaviour
         string lat_text = json_data[0][index]; // lat
         string long_text = json_data[1][index]; // long
         string name_text = json_data[2]; // name
-        string epoch_text = json_data[3][index]; // epoch
-        string alt_text = json_data[0][index]; // alt
+        string alt_text = json_data[3][index]; // alt
 
         //show 'em    :3
         UIManager uiManager = transform.parent.parent.gameObject.GetComponent<UIManager>();
@@ -33,9 +32,7 @@ public class TrashData : MonoBehaviour
 
         uiManager.UpdateLongitudeText("Long: " + long_text);
 
-        uiManager.UpdateEpochText("Epoch: " + epoch_text);
-
-        uiManager.UpdateAltitudeText("Alt: " + alt_text);
+        uiManager.UpdateElevationText("Elevation: " + alt_text + " km");
     }
 
     int GetIndex()

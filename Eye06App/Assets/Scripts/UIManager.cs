@@ -5,14 +5,13 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] GameObject panel;
+    //[SerializeField] GameObject panel;
 
     [SerializeField] TextMeshProUGUI total_text;
     [SerializeField] TextMeshProUGUI debris_name_text;
     [SerializeField] TextMeshProUGUI latitude_text;
     [SerializeField] TextMeshProUGUI longitude_text;
-    [SerializeField] TextMeshProUGUI altiitude_text;
-    [SerializeField] TextMeshProUGUI epoch_text;
+    [SerializeField] TextMeshProUGUI elivation_text;
 
     public void UpdateTotalText(string txt)
     {
@@ -30,13 +29,10 @@ public class UIManager : MonoBehaviour
     {
         longitude_text.text = txt;
     }  
-    public void UpdateAltitudeText(string txt)
+    public void UpdateElevationText(string txt)
     {
-        altiitude_text.text = txt;
+        elivation_text.text = txt;
     }  
-    public void UpdateEpochText(string txt)
-    {
-        epoch_text.text = txt;
-    }
+
 
 }
