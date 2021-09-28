@@ -5,8 +5,23 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    //[SerializeField] GameObject panel;
+    public static UIManager instance;
 
+    //singleton..
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
+    //[SerializeField] GameObject panel;
+    public Animator UI_Controller;
     [SerializeField] TextMeshProUGUI total_text;
     [SerializeField] TextMeshProUGUI debris_name_text;
     [SerializeField] TextMeshProUGUI latitude_text;
@@ -34,5 +49,9 @@ public class UIManager : MonoBehaviour
         elivation_text.text = txt;
     }  
 
+    public void HideUI()
+    {
+        UI_Controller.Play("textFadeOut");
+    }
 
 }

@@ -6,8 +6,11 @@ using SimpleJSON;
 
 public class TrashData : MonoBehaviour
 {
+
     private void OnMouseDown()
     {
+
+        UIManager.instance.UI_Controller.Play("textFadeIn");
         //get index
         int index = GetIndex();
 
@@ -33,6 +36,8 @@ public class TrashData : MonoBehaviour
         uiManager.UpdateLongitudeText("Long: " + long_text);
 
         uiManager.UpdateElevationText("Elevation: " + alt_text + " km");
+
+       
     }
 
     int GetIndex()

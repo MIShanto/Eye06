@@ -30,29 +30,36 @@ namespace CoordinateMapper {
         [HideInInspector] public JSONNode json_data_of_trash;
         // Start is called before the first frame update
         void Start()
-        {          
-           /* string json = dataFile.ToString();
-            Vector3[] points = new Vector3[2];
-            var N = JSON.Parse(json);
+        {
+            /* string json = dataFile.ToString();
+             Vector3[] points = new Vector3[2];
+             var N = JSON.Parse(json);
 
-            var point = PlanetUtility.VectorFromLatLng(N[0][0][0][0].AsFloat, N[0][0][1][0].AsFloat, Vector3.right);
-            var hitInfo = PlanetUtility.LineFromOriginToSurface(transform, point, LayerMask.GetMask("Planet"));
+             var point = PlanetUtility.VectorFromLatLng(N[0][0][0][0].AsFloat, N[0][0][1][0].AsFloat, Vector3.right);
+             var hitInfo = PlanetUtility.LineFromOriginToSurface(transform, point, LayerMask.GetMask("Planet"));
 
-            points[0] = hitInfo.Value.point;
-            point = PlanetUtility.VectorFromLatLng(N[0][0][0][1].AsFloat, N[0][0][1][1].AsFloat, Vector3.right);
-            //Debug.LogError(point);
-            hitInfo = PlanetUtility.LineFromOriginToSurface(transform, point, LayerMask.GetMask("Planet"));
+             points[0] = hitInfo.Value.point;
+             point = PlanetUtility.VectorFromLatLng(N[0][0][0][1].AsFloat, N[0][0][1][1].AsFloat, Vector3.right);
+             //Debug.LogError(point);
+             hitInfo = PlanetUtility.LineFromOriginToSurface(transform, point, LayerMask.GetMask("Planet"));
 
-            points[1] = hitInfo.Value.point;
+             points[1] = hitInfo.Value.point;
 
-            LineController.instance.SetupLines(points);
-            Debug.LogError(points[0]);
-            Debug.LogError(points[1]);*/
+             LineController.instance.SetupLines(points);
+             Debug.LogError(points[0]);
+             Debug.LogError(points[1]);*/
 
             //GetJsonData();
             //InvokeRepeating("GetJsonData", 0.2f, 0.2f);
             //ParseFile(dataFile.text);
             //ParseFile(LoadJSON.instance.json_data);
+
+           /* string json = dataFile.ToString();
+            Debug.Log(json);
+            var N = JSON.Parse(json);
+            TestDraw(N);
+
+            ParseFile(dataFile.text);*/
 
         }
         void GetJsonData()
@@ -63,32 +70,20 @@ namespace CoordinateMapper {
 
         public void TestDraw(JSONNode myJSON_file)
         {
-            Vector3[] points = new Vector3[5];
-            for (int i = 0; i < 5; i++)
+            Vector3[] points = new Vector3[43500];
+            for (int i = 0; i < 43200; i++)
             {
                 var point = PlanetUtility.VectorFromLatLng(myJSON_file[0][0][i].AsFloat, myJSON_file[0][1][i].AsFloat, Vector3.right);
                 var hitInfo = PlanetUtility.LineFromOriginToSurface(transform, point, LayerMask.GetMask("Planet"));
-                points[i] = hitInfo.Value.point + point;
-                
+                points[i] = hitInfo.Value.point + (point * myJSON_file[0][2][i].AsFloat / 2000f);
+
             }
             LineController.instance.SetupLines(points);
-            //Debug.LogError(points[0]);
-            //Debug.LogError(points[1]);
-           // Debug.LogError(points[2]);
-           // Debug.LogError(points[3]);
-           // Debug.LogError(points[4]);
+            LineController.instance.startDrawing = true;
 
         }
         public void StartParsing(JSONNode myJSON_file)
         {
-            /*          float test_float = 41.9999599995999959f;
-                        var point = PlanetUtility.VectorFromLatLng(myJSON_file[0][0].AsFloat, myJSON_file[1][0].AsFloat, Vector3.right);
-                        var hitInfo = PlanetUtility.LineFromOriginToSurface(transform, point, LayerMask.GetMask("Planet"));
-                        Vector3[] points = new Vector3[2];
-                        points[0] = hitInfo.Value.point;
-                        Debug.LogError(myJSON_file[0][0]);
-                        Debug.LogError(test_float);
-                        Instantiate(pointPrefab, new Vector3(0.1f, 0.2f, 0.3f), Quaternion.identity);*/
 
             json_data_of_trash = myJSON_file;
 
@@ -106,61 +101,20 @@ namespace CoordinateMapper {
                 {
                     var plotted = info.Plot(transform, transform, 0, false, null, json_data_of_trash[3][i].AsFloat);
 
-                    UpdateTrashZValue(plotted, i);
-
-                    //plotted.transform.position = new Vector3(plotted.transform.position.x, plotted.transform.position.y,
-                    //   json_data_of_trash[3][i].AsFloat * 3/3500f);
-
                     plotted.name = "Default Point " + i;
 
-                    //StartCoroutine(DoDelay(5f, info, i));
                 }
                 else
                 {
                     var plotted = info.Plot(transform, transform, 0, true, transform.GetChild(i).gameObject, json_data_of_trash[3][i].AsFloat);
 
-                    UpdateTrashZValue(plotted, i);
-
-                    //plotted.transform.position = new Vector3(plotted.transform.position.x, plotted.transform.position.y,
-                    //  plotted.transform.position.y * json_data_of_trash[3][i].AsFloat * 3 / 3500f);
                 }
             }
 
             if (loadComplete != null) { loadComplete.Invoke(infos); }
         }
 
-        void UpdateTrashZValue(GameObject obj, int i)
-        {
-            //Debug.Log(obj);
-            if(json_data_of_trash[3][i].AsFloat == 0)
-            {
-                obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y,
-                                                           obj.transform.position.z);
-            }
-            else
-            {
-                //float zValue = (3 / 3500f * json_data_of_trash[3][i].AsFloat);// obj.transform.position.z - ((3400 / 3500) * json_data_of_trash[3][i].AsFloat);
-                //obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, zValue * obj.transform.position.z);
-            }
-            /*if(obj.transform.position.z > 0f && obj != null)
-            {
-                float zValue = (3 / 3500f * json_data_of_trash[3][i].AsFloat);//0.1f + (2/3500f * json_data_of_trash[3][i].AsFloat);
-                obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, zValue);
-            }
-            else if (obj.transform.position.z < 0f && obj != null )
-            {
-                float zValue = (3 / 3500f * json_data_of_trash[3][i].AsFloat);// obj.transform.position.z - ((3400 / 3500) * json_data_of_trash[3][i].AsFloat);
-                obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, zValue);
-            }*/
-            //plotted.transform.position = new Vector3(plotted.transform.position.x, plotted.transform.position.y,
-            //   json_data_of_trash[3][i].AsFloat * 3/3500f);
-        }
-        /*  IEnumerator DoDelay(float delayTime, DefaultCoordinatePointInfo info, int i)
-          {
-              yield return new WaitForSeconds(delayTime);
-              var plotted = info.Plot(transform, transform, 0, false, null);
-              plotted.name = "Default Point " + i;
-          }*/
+     
     }
 
     

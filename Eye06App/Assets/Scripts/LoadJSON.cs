@@ -45,18 +45,41 @@ public class LoadJSON : MonoBehaviour
         getDataUrlTrash2 = "https://mamunspacer.herokuapp.com/api/2/";
         getDataUrlTrash3 = "https://mamunspacer.herokuapp.com/api/3/";
         getDataUrlTrash4 = "https://mamunspacer.herokuapp.com/api/4/";
-        getPredictedDataUrlTrash2 = "https://mamunspacer.herokuapp.com/api/p2";
 
-        InvokeRepeating("GetJsonData", 0f, 5f);
+        //getPredictedDataUrlTrash2 = "https://mamunspacer.herokuapp.com/api/p2";
+
+        //StartCoroutine(GetJsonData());
+        //InvokeRepeating("GetJsonData", 0f, 1f);
+        GetJsonData();
+/*
+        StartCoroutine(RequestWebService(getDataUrlTrash1, 1));
+        StartCoroutine(RequestWebService(getDataUrlTrash2, 2));
+        StartCoroutine(RequestWebService(getDataUrlTrash3, 3));
+        StartCoroutine(RequestWebService(getDataUrlTrash4, 4));
+
+        StartCoroutine(RequestWebService(getPredictedDataUrlTrash2, 5));*/
     }
 
-    public void GetJsonData()
+    /* IEnumerator GetJsonData()
+     {
+         yield return new WaitForSeconds(10f);
+
+         StartCoroutine(RequestWebService(getDataUrlTrash1, 1));
+         StartCoroutine(RequestWebService(getDataUrlTrash2, 2));
+         StartCoroutine(RequestWebService(getDataUrlTrash3, 3));
+         StartCoroutine(RequestWebService(getDataUrlTrash4, 4));
+
+         StartCoroutine(RequestWebService(getPredictedDataUrlTrash2, 5));
+     }*/
+
+    void GetJsonData()
     {
         StartCoroutine(RequestWebService(getDataUrlTrash1, 1));
         StartCoroutine(RequestWebService(getDataUrlTrash2, 2));
         StartCoroutine(RequestWebService(getDataUrlTrash3, 3));
         StartCoroutine(RequestWebService(getDataUrlTrash4, 4));
-        //StartCoroutine(RequestWebService(getPredictedDataUrlTrash2, 2));
+
+       // StartCoroutine(RequestWebService(getPredictedDataUrlTrash2, 5));
     }
 
     IEnumerator RequestWebService(string url, int i)
@@ -68,7 +91,8 @@ public class LoadJSON : MonoBehaviour
             if (webData.isNetworkError || webData.isHttpError)
             {
                 //print("---------------- ERROR ----------------");
-                //print(webData.error);
+                print(webData.error);
+                Invoke("GetJsonData", 10);
             }
             else
             {
@@ -78,23 +102,33 @@ public class LoadJSON : MonoBehaviour
 
                     if (jsonData == null)
                     {
-                        //print("---------------- NO DATA ----------------");
+                        print("---------------- NO DATA ----------------");
                     }
                     else
                     {
-                        //print("---------------- JSON DATA ----------------");
-                        if(i==1)
+                        print("---------------- JSON DATA ----------------");
+                        if (i == 1)
                             trash1.StartParsing(jsonData);
                         else if (i == 2)
-                            //trash2.TestDraw(jsonData);
+                        {
                             trash2.StartParsing(jsonData);
+                        }
                         else if (i == 3)
                             trash3.StartParsing(jsonData);
                         else if (i == 4)
                             trash4.StartParsing(jsonData);
+                        else if (i == 5)
+                            trash2.TestDraw(jsonData);
+
+                        Invoke("GetJsonData", 5);
+                        
                     }
                 }
             }
         }
+        
+
+        //StartCoroutine(GetJsonData());
+
     }
 }

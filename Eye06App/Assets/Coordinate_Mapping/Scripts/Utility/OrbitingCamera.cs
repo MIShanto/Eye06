@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace CoordinateMapper {
 
@@ -38,10 +39,19 @@ namespace CoordinateMapper {
             else if (Input.GetKey(KeyCode.X) || zoomOut) { ZoomCamera(false); }
 
             if (Input.GetMouseButtonDown(0)) {
+                if (EventSystem.current.IsPointerOverGameObject())
+                    return;
+
                 previousPos = cam.ScreenToViewportPoint(Input.mousePosition);
             }
 
-            if (Input.GetMouseButton(0)) { PanCamera(); }
+            if (Input.GetMouseButton(0))
+            {
+                if (EventSystem.current.IsPointerOverGameObject())
+                    return; 
+
+                PanCamera();
+            }
         }
 
         public void ZoomInPressed()
