@@ -25,7 +25,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
 
 
 
@@ -39,7 +39,7 @@
   <h3 align="center">Eye06</h3>
 
   <p align="center">
-    Eye06 is an geospatial application which is used to detect or monitor any known debris around the earth in real time 
+    Eye06 is an geospatial application which is used to detect or monitor any known debris around the earth in real time!
     <br />
     <a href="https://github.com/MIShanto/Eye06"><strong>Explore the docs »</strong></a>
     <br />
@@ -83,14 +83,16 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Product Name Screen Shot](/images/future%20path%20predictin.png)
 ![Starting Point](/images/starting%20point.png)
 ![Debris Visuals](/images/debri%20visuals.png)
+![Product Name Screen Shot](/images/future%20path%20predictin.png)
+
+
 Real time space trash monitoring application which allows the user to have an amazing experience of seeing the space debris moving around our beloved earth.
 
 We've used NASA dataset to collect information about the debris and portrayed them into the frontend.
 
-Anyone with the app can have the exact information with just a few clicks rather then getting lost in huge dataset numbers
+Anyone with the app can have the exact information with just a few clicks rather then getting lost in huge dataset numbers.
 
 
 ### Built With
@@ -156,15 +158,15 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/MIShanto/repo.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/MIShanto/Eye06.svg?style=for-the-badge
 [contributors-url]: https://github.com/MIShanto/Eye06/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/MIShanto/repo.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/MIShanto/Eye06.svg?style=for-the-badge
 [forks-url]: https://github.com/MIShanto/Eye06/network/members
-[stars-shield]: https://img.shields.io/github/stars/MIShanto/repo.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/MIShanto/Eye06.svg?style=for-the-badge
 [stars-url]: https://github.com/MIShanto/Eye06/stargazers
-[issues-shield]: https://img.shields.io/github/issues/MIShanto/repo.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/MIShanto/Eye06.svg?style=for-the-badge
 [issues-url]: https://github.com/MIShanto/Eye06/issues
-[license-shield]: https://img.shields.io/github/license/MIShanto/repo.svg?style=for-the-badge
-[license-url]: https://github.com/MIShanto/Eye06/blob/master/LICENSE.txt
+[license-shield]: https://img.shields.io/github/license/MIShanto/Eye06.svg?style=for-the-badge
+[license-url]: https://github.com/MIShanto/Eye06/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/MIShanto
