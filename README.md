@@ -7,7 +7,7 @@
 ***
 ***
 *** To avoid retyping too much info. Do a search and replace for the following:
-*** MIShanto, Eye06, twitter_handle, shanto4045@gmail.com, Eye06, Eye06 is an geospatial application which is used to detect or monitor any known debris around the earth in real time 
+*** mamuncseru, 313, twitter_handle, shanto4045@gmail.com, 313, 313 is an geospatial application which is used to detect or monitor any known debris around the earth in real time 
 -->
 
 
@@ -25,6 +25,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
+[![GitHub release (latest by date)][release-shield]][release-url]
 
 
 
@@ -32,8 +33,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/MIShanto/Eye06">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/mamuncseru/313">
+    <img src="images/logo.png" alt="Logo" width="200" height="200">
   </a>
 
   <h3 align="center">Eye06</h3>
@@ -41,14 +42,14 @@
   <p align="center">
     Eye06 is an geospatial application which is used to detect or monitor any known debris around the earth in real time!
     <br />
-    <a href="https://github.com/MIShanto/Eye06"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/mamuncseru/313">
     <br />
     <br />
-    <a href="https://github.com/MIShanto/Eye06">View Demo</a>
+    <a href="https://www.youtube.com/watch?v=rTIMK8s7NX0">View Demo</a>
     ·
-    <a href="https://github.com/MIShanto/Eye06/issues">Report Bug</a>
+    <a href="https://github.com/mamuncseru/313/issues">Report Bug</a>
     ·
-    <a href="https://github.com/MIShanto/Eye06/issues">Request Feature</a>
+    <a href="https://github.com/mamuncseru/313/issues">Request Feature</a>
   </p>
 </p>
 
@@ -64,15 +65,8 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#overview">Overview</a></li>
+    <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
@@ -83,16 +77,15 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Starting Point](/images/starting%20point.png)
-![Debris Visuals](/images/debri%20visuals.png)
-![Product Name Screen Shot](/images/future%20path%20predictin.png)
+![Debris Visuals](images/1.png)
 
+![Starting Point](images/2.png)
 
-Real time space trash monitoring application which allows the user to have an amazing experience of seeing the space debris moving around our beloved earth.
+Real time space trash monitoring application which allows the user to have an amazing experience of seeing the space debris moving around our beloved Earth.
 
-We've used NASA dataset to collect information about the debris and portrayed them into the frontend.
+We've used space debris dataset from Celestrak to collect information about the debris from TLE files and used Heroku to pass the processed data to the front-end, Unity3d to display the data in an elegant way. Look at <a href="#overview">Overview</a> for a detailed explanation on how this works.
 
-Anyone with the app can have the exact information with just a few clicks rather then getting lost in huge dataset numbers.
+Anyone with the app can have the exact information with just a few clicks rather then getting lost in huge dataset full scientific numbers.
 
 
 ### Built With
@@ -100,51 +93,46 @@ Anyone with the app can have the exact information with just a few clicks rather
 * [Django](https://www.djangoproject.com)
 * [Unity](https://unity.com)
 * [Figma](https://www.figma.com)
+* [Herouku](https://www.heroku.com)
+* [Skyfield](https://rhodesmill.org/skyfield/)
+* [Celstrack](https://celestrak.com)
+* [Coordinate Mapper (unity library)](https://assetstore.unity.com/packages/templates/systems/coordinate-mapper-177904)
+* [SimpleJSON](https://github.com/HenrikPoulsen/SimpleJSON)
 
 
 
-<!-- GETTING STARTED -->
-## Getting Started
-
-To get a local copy up and running follow these simple steps.
-
-### Prerequisites
-
-* Unity 3D
-* A browser compatible with WebGL 
-
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/MIShanto/Eye06.git
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-
-<!-- ROADMAP -->
+<!-- OVERVIEW-->
 ## Overview
+
 This is how the application works:
 
 ![overview](images/overview.png)
 
+We are fetching all the debris TLE dataset from Celestrak using a python library called "Skyfield" which runs above sgp4 library and calculating latitude, longitude, altitude along with other crucial information of debris and storing them in a JSON format. After that we are using a REST API and deploying them on Heroku web server so that we can get real time data anytime we want. We used Unity3D engine to fetch those JSON data in real-time and visualize them by using coordinate mapper.
+
+Now, We can see real time debris moving around the earth and by clicking individual debris we get there additional information such as latitude, longitude, elevation, name, no of total debris and much more. Our unique feature will allow users to predict the future path of the debris in a very convenient way as well. Interactivity and usability is our selling point.
+
+
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the GNU GPL 3.0 License. See `LICENSE` for more information.
+
+
+<!-- USAGE -->
+## Usage
+
+First download the latest APK from [releases](https://github.com/mamuncseru/313/releases) and install. Currently only available for Android; iOS version will be released soon.
+
+![3](images/3.png)
+
+![4](images/4.png)
+
+![5](images/5.png)
+
+After opening our app you can see options like zoom in and out. few seconds later our app will fetch realtime debris data and show them on screen. There are 4 catagories debri that we got from celestrak. If we tap on individual debris we can get their real time Latitude, Longitude, Elevation, Name and no of total debris of that catagory currently tracked. 
+You will also get a option to predict future path for the selected debris for x days. 
+On that screen you can visualy see the path the debris will follow for the selected days. We have a very user friendly UI which is very interactive and easy to use, such as our speed option will let the user see debris moving to the path in any pace he/she wants.
 
 
 <!-- ACKNOWLEDGEMENTS -->
@@ -158,15 +146,17 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/MIShanto/Eye06.svg?style=for-the-badge
-[contributors-url]: https://github.com/MIShanto/Eye06/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/MIShanto/Eye06.svg?style=for-the-badge
-[forks-url]: https://github.com/MIShanto/Eye06/network/members
-[stars-shield]: https://img.shields.io/github/stars/MIShanto/Eye06.svg?style=for-the-badge
-[stars-url]: https://github.com/MIShanto/Eye06/stargazers
-[issues-shield]: https://img.shields.io/github/issues/MIShanto/Eye06.svg?style=for-the-badge
-[issues-url]: https://github.com/MIShanto/Eye06/issues
-[license-shield]: https://img.shields.io/github/license/MIShanto/Eye06.svg?style=for-the-badge
-[license-url]: https://github.com/MIShanto/Eye06/blob/master/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/mamuncseru/313.svg?style=for-the-badge
+[contributors-url]: https://github.com/mamuncseru/313/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/mamuncseru/313.svg?style=for-the-badge
+[forks-url]: https://github.com/mamuncseru/313/network/members
+[stars-shield]: https://img.shields.io/github/stars/mamuncseru/313.svg?style=for-the-badge
+[stars-url]: https://github.com/mamuncseru/313/stargazers
+[issues-shield]: https://img.shields.io/github/issues/mamuncseru/313.svg?style=for-the-badge
+[issues-url]: https://github.com/mamuncseru/313/issues
+[license-shield]: https://img.shields.io/github/license/mamuncseru/313.svg?style=for-the-badge
+[license-url]: https://github.com/mamuncseru/313/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/MIShanto
+[linkedin-url]: https://linkedin.com/in/mamuncseru
+[release-shield]: https://img.shields.io/github/v/release/mamuncseru/313?style=for-the-badge
+[release-url]: https://github.com/mamuncseru/313/releases
